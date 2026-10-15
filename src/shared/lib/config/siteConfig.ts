@@ -1,0 +1,25 @@
+export const SITE_CONFIG = {
+  name: 'KOCHU.AI',
+  tagline: 'Creator-Led Technology Education',
+  audience: 'Kerala / Malayalam Tech Audience',
+  instagram: 'https://instagram.com/kochu.ai',
+  instagramHandle: '@kochu.ai',
+  youtube: 'https://youtube.com/@kochuai',
+  linkedin: 'https://linkedin.com/in/kochu-ai',
+  contactEmail: 'collaborations@kochu.ai',
+  metrics: {
+    instagramFollowers: '82.5K',
+    youtubeSubscribers: '4.5K',
+    linkedinConnections: '10K+',
+    typicalReelViews: '20K - 80K',
+    typicalStoryViews: '1,500 - 3,500',
+    coreNiche: 'AI Tools & Tech Education',
+    engagementRate: '6.8%',
+    geographicDistribution: {
+      kerala: '74%',
+      uaeGcc: '16%',
+      restOfIndia: '10%',
+    },
+    topDemographics: '18-34 Tech Enthusiasts, Developers, Creators & Entrepreneurs',
+  },
+} as const
