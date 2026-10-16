@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, Play, X, ExternalLink, Sparkles } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Play, X, Sparkles } from 'lucide-react'
 import { InstagramBadgeIcon, InstagramIcon } from '@/shared/ui/Icons/SocialIcons'
 import {
   INSTAGRAM_REELS,
@@ -115,7 +115,7 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
       {reels.length > 0 ? (
         <div
           ref={scrollContainerRef}
-          className="flex items-stretch gap-3 sm:gap-4 overflow-x-auto scroll-smooth pb-3 px-1 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto scroll-smooth pb-4 px-1 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {reels.map((reel) => {
             return (
@@ -123,10 +123,10 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                 key={reel.id}
                 type="button"
                 onClick={() => setActiveReel(reel)}
-                className="group relative shrink-0 w-[180px] sm:w-[200px] lg:w-[220px] rounded-2xl bg-white border border-[#e2ece0] hover:border-[#7BC943] p-2.5 sm:p-3 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_-10px_rgba(116,198,64,0.22)] snap-start cursor-pointer flex flex-col justify-between"
+                className="group relative shrink-0 w-[270px] sm:w-[310px] lg:w-[335px] rounded-2xl sm:rounded-[24px] bg-[#fbf9f4] border border-[#e8e2d4] hover:border-[#7BC943]/60 p-3.5 sm:p-4 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-10px_rgba(20,31,16,0.12)] snap-start cursor-pointer flex flex-col justify-between"
               >
-                {/* 9:14 Portrait Reel Thumbnail Box */}
-                <div className="relative aspect-[9/14] w-full rounded-xl overflow-hidden bg-slate-900 select-none">
+                {/* 1. Landscape ~16:9 Thumbnail Box with Rounded Corners */}
+                <div className="relative aspect-[16/10] sm:aspect-video w-full rounded-xl sm:rounded-[18px] overflow-hidden bg-slate-900 select-none">
                   {reel.thumbnailUrl ? (
                     <img
                       src={reel.thumbnailUrl}
@@ -140,29 +140,37 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                     </div>
                   )}
 
-                  {/* Top Instagram Reel identifier badge */}
-                  <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center gap-1 text-[10px] font-semibold text-white shadow-sm">
-                    <InstagramBadgeIcon className="w-3 h-3 text-[#E1306C]" />
-                    <span>Reel</span>
-                  </div>
-
-                  {/* Gradient Overlay & Play Button */}
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors flex items-center justify-center">
+                  {/* Gradient Overlay & Subtle Play Button on hover */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                     <div className="w-11 h-11 rounded-full bg-white/95 group-hover:bg-[#7BC943] text-[#141f10] group-hover:text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
                       <Play className="w-4 h-4 ml-0.5 fill-current" />
                     </div>
                   </div>
                 </div>
 
-                {/* Reel Caption / Title */}
-                <div className="pt-2.5 px-0.5 pb-0.5">
-                  <h3 className="text-xs sm:text-[13px] font-bold text-[#141f10] group-hover:text-[#38761a] transition-colors line-clamp-2 leading-snug">
-                    {reel.title}
-                  </h3>
-                  <p className="text-[10px] sm:text-[11px] text-[#6e8367] font-mono mt-1 tracking-tight flex items-center gap-1">
-                    <InstagramIcon className="w-2.5 h-2.5 text-[#E1306C]" />
-                    {reel.author || '@kochu.ai'}
-                  </p>
+                {/* 2. Card Content: Date + Large Serif Title + View Link */}
+                <div className="pt-4 sm:pt-5 pb-1 px-1 flex-1 flex flex-col justify-between">
+                  <div>
+                    {/* Small Faded Gray Date Label */}
+                    <p className="text-xs sm:text-[13px] text-[#788574] font-medium font-sans mb-2 sm:mb-2.5">
+                      {reel.date || 'July 10, 2026'}
+                    </p>
+
+                    {/* Much Larger Bold Serif Title with Tighter Line Spacing */}
+                    <h3
+                      className="text-xl sm:text-[22px] lg:text-2xl font-bold text-[#141f10] group-hover:text-[#2c5c13] transition-colors leading-[1.18] sm:leading-[1.16] tracking-tight line-clamp-3"
+                      style={{ fontFamily: '"DM Serif Display", serif' }}
+                    >
+                      {reel.title}
+                    </h3>
+                  </div>
+
+                  {/* 3. Bottom View -> Link in Small Underlined Font */}
+                  <div className="mt-6 sm:mt-8 pt-1">
+                    <span className="text-xs sm:text-[13px] font-semibold text-[#141f10] underline underline-offset-4 decoration-1 group-hover:text-[#2c5c13] transition-colors inline-flex items-center gap-1.5">
+                      View &rarr;
+                    </span>
+                  </div>
                 </div>
               </button>
             )
@@ -186,18 +194,18 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
           role="dialog"
           aria-modal="true"
           aria-label={activeReel.title}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setActiveReel(null)}
         >
           <div
-            className="relative w-full max-w-sm sm:max-w-md bg-neutral-950 rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col max-h-[92vh]"
+            className="relative w-full max-w-[420px] max-h-[85vh] bg-neutral-950 rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar with title & close button */}
             <div className="flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10 text-white shrink-0">
-              <div className="flex items-center gap-2 truncate pr-2">
+              <div className="flex items-center gap-2 min-w-0 pr-2">
                 <InstagramBadgeIcon className="w-4 h-4 text-[#E1306C] shrink-0" />
-                <h4 className="text-xs sm:text-sm font-semibold truncate">
+                <h4 className="text-xs sm:text-sm font-semibold truncate text-white">
                   {activeReel.title}
                 </h4>
               </div>
@@ -211,15 +219,6 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                     <span className="hidden sm:inline">Get Prompts</span>
                   </Link>
                 )}
-                <a
-                  href={activeReel.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Open on Instagram"
-                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
                 <button
                   type="button"
                   onClick={() => setActiveReel(null)}
@@ -232,11 +231,12 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
             </div>
 
             {/* Embedded Instagram Reel Frame */}
-            <div className="relative w-full bg-black flex-1 min-h-[480px] sm:min-h-[580px] overflow-hidden">
+            <div className="relative w-full flex-1 aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
               <iframe
                 src={getInstagramEmbedUrl(activeReel.url)}
                 title={activeReel.title}
-                className="w-full h-full border-0"
+                className="w-full h-full border-0 object-cover"
+                scrolling="no"
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                 allowFullScreen
               />

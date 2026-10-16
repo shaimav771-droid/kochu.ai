@@ -23,11 +23,11 @@ export function HeroSection() {
       className="relative w-full min-h-[100dvh] md:min-h-fit lg:min-h-[660px] lg:h-screen bg-gradient-to-b from-[#eee9df] via-[#eae5da] to-[#faf8f2] border-b border-[#ded7c8] overflow-x-hidden flex flex-col justify-between md:justify-center pt-20 sm:pt-24 pb-6 sm:pb-8 md:py-0 md:pb-6 lg:pb-0 scroll-mt-0"
     >
       {/* TOP BAR: BRAND LOGO + NAVIGATION (Responsive) */}
-      <div className="absolute top-4 sm:top-6 left-0 right-0 z-40 px-5 sm:px-8 lg:px-10 max-w-7xl mx-auto flex items-center justify-between">
+      <div className="absolute top-4 sm:top-6 left-0 right-0 z-40 px-5 sm:px-8 lg:px-8 xl:px-12 2xl:px-16 w-full flex items-center justify-between">
         {/* TOP LEFT CORNER BRAND LOGO WITH GESTURAL DOTTED GREEN ARROW */}
         <div className="relative inline-block py-1 px-1 select-none">
           <span
-            className="text-2xl sm:text-3xl lg:text-[42px] font-normal text-[#141f10] tracking-tight relative z-10 block"
+            className="text-2xl sm:text-3xl lg:text-[26px] font-normal text-[#141f10] tracking-tight relative z-10 block"
             style={{ fontFamily: '"DM Serif Display", serif' }}
           >
             kochu.ai
@@ -168,7 +168,7 @@ export function HeroSection() {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-20 max-w-[1360px] mx-auto w-full px-5 sm:px-8 lg:px-8 pt-2 sm:pt-4 md:pt-28 lg:pt-36 lg:pb-12 md:my-auto h-auto flex-1 flex flex-col justify-between md:block">
+      <div className="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-10 pt-2 sm:pt-4 md:pt-28 lg:pt-0 lg:pb-0 md:my-auto lg:my-auto h-auto flex-1 flex flex-col justify-between md:block">
         
         {/* MOBILE STACKED LAYOUT (< lg:):
             1. Main Heading placed nicely with dedicated top breathing room below kochu.ai
@@ -210,30 +210,31 @@ export function HeroSection() {
         </div>
 
         {/* DESKTOP EDITORIAL LAYOUT (lg:grid):
-            Split layout with stationary center portrait in StickyHeroExperience (4 / 3 / 5 cols matching Screen 2)
+            Split layout with stationary center portrait in StickyHeroExperience (4 / 3 / 5 cols matching Image 2)
         */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center">
-          {/* LEFT COLUMN: Editorial Headline placed down with comfortable clearance */}
-          <div className="lg:col-span-4 xl:col-span-4 z-20 text-left pt-2 xl:pt-4">
-            <h1 className="text-5xl lg:text-6xl xl:text-[76px] font-normal tracking-tight text-[#141f10] leading-[0.96] font-serif">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center min-h-[calc(100vh-5rem)]">
+          {/* LEFT COLUMN: Editorial Headline vertically centered alongside Suhail */}
+          <div className="lg:col-span-5 xl:col-span-5 2xl:col-span-4 z-20 text-left lg:-translate-x-6 xl:-translate-x-10 2xl:-translate-x-14">
+            <h1 className="text-5xl lg:text-[46px] min-[1150px]:text-[54px] xl:text-[66px] 2xl:text-[76px] font-normal tracking-tight text-[#141f10] leading-[0.96] font-serif">
               <span className="font-dm-serif" style={{ fontFamily: '"DM Serif Display", serif' }}>Turning</span> <br />
-              <span className="italic font-serif font-light text-[#7bc943]">AI into real-world</span> <br />
-              <span className="font-semibold font-serif">products.</span>
+              <span className="italic font-serif font-light text-[#7bc943] whitespace-nowrap">AI into real-</span> <br />
+              <span className="italic font-serif font-light text-[#7bc943]">world</span> <br />
+              <span className="font-semibold font-serif whitespace-nowrap">products.</span>
             </h1>
           </div>
 
           {/* MIDDLE SPACER FOR STATIONARY CENTERED PORTRAIT */}
-          <div className="lg:col-span-3 xl:col-span-3 pointer-events-none" />
+          <div className="lg:col-span-2 xl:col-span-2 2xl:col-span-3 pointer-events-none" />
 
-          {/* RIGHT COLUMN: Intro Text & Description Writing */}
-          <div className="lg:col-span-5 xl:col-span-5 z-20 text-left max-w-md lg:ml-auto space-y-3 pt-24 xl:pt-28">
+          {/* RIGHT COLUMN: Intro Text & Description Writing vertically positioned lower alongside Suhail */}
+          <div className="lg:col-span-5 xl:col-span-5 z-20 text-left max-w-[380px] lg:pl-2 xl:pl-4 space-y-3.5 pt-20 lg:pt-64 xl:pt-76 2xl:pt-88 lg:translate-x-6 xl:translate-x-10 2xl:translate-x-14">
             <h2
-              className="text-3xl sm:text-4xl italic text-[#141f10] font-normal tracking-tight"
+              className="text-3xl sm:text-[34px] xl:text-[38px] italic text-[#141f10] font-normal tracking-tight"
               style={{ fontFamily: '"DM Serif Display", serif' }}
             >
               Hey, I'm Suhail 👋
             </h2>
-            <p className="text-lg lg:text-xl text-[#3d4d35] font-medium leading-relaxed">
+            <p className="text-sm sm:text-base xl:text-[17px] text-[#3d4d35] font-normal leading-[1.65]">
               I help developers, students, and founders build practical AI tools, automate complex workflows, and master modern tech in Malayalam.
             </p>
           </div>

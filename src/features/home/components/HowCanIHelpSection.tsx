@@ -68,11 +68,11 @@ export function HowCanIHelpSection() {
   const mobileCol1 = [SERVICE_OPTIONS[0], SERVICE_OPTIONS[2]] // Learn AI, Workshops & Speaking
   const mobileCol2 = [SERVICE_OPTIONS[1], SERVICE_OPTIONS[3]] // Solve a Business Problem, Collaborate With Me
 
-  // Desktop options arrangement (EXACTLY matching Photo 2):
-  // Column 1 (Left, higher): Solve a Business Problem, Collaborate With Me
-  // Column 2 (Right, staggered down): Learn AI, Workshops & Speaking
-  const desktopCol1 = [SERVICE_OPTIONS[1], SERVICE_OPTIONS[3]]
-  const desktopCol2 = [SERVICE_OPTIONS[0], SERVICE_OPTIONS[2]]
+  // Desktop options arrangement (matching 1st reference image):
+  // Column 1 (Left): Learn AI (top), Workshops & Speaking (bottom)
+  // Column 2 (Right, staggered down): Solve a Business Problem (top), Collaborate With Me (bottom)
+  const desktopCol1 = [SERVICE_OPTIONS[0], SERVICE_OPTIONS[2]]
+  const desktopCol2 = [SERVICE_OPTIONS[1], SERVICE_OPTIONS[3]]
 
   const renderMobileCard = (
     option: ServiceOption,
@@ -110,19 +110,19 @@ export function HowCanIHelpSection() {
         key={option.id}
         type="button"
         onClick={() => handleAction(option)}
-        className="w-[205px] xl:w-[230px] 2xl:w-[250px] aspect-square text-left bg-[#edf6e8] hover:bg-white active:bg-white rounded-[26px] xl:rounded-[30px] p-4.5 xl:p-5.5 shadow-[0_12px_32px_rgba(20,31,16,0.1)] hover:shadow-[0_20px_40px_rgba(20,31,16,0.18)] transition-all duration-300 group cursor-pointer flex flex-col justify-start hover:-translate-y-1.5 focus:outline-none focus:ring-2 focus:ring-[#141f10]/30"
+        className="w-[215px] xl:w-[235px] 2xl:w-[252px] aspect-square text-left bg-[#eef5e9] hover:bg-white active:bg-white rounded-[26px] xl:rounded-[30px] p-5 xl:p-6 shadow-lg shadow-[#141f10]/10 hover:shadow-xl hover:shadow-[#141f10]/18 transition-all duration-300 group cursor-pointer flex flex-col justify-start hover:-translate-y-1.5 focus:outline-none focus:ring-2 focus:ring-[#141f10]/30 border border-white/60"
       >
         {/* Top Icon */}
-        <div className="w-11 h-11 xl:w-13 xl:h-13 shrink-0 flex items-center justify-start group-hover:scale-105 transition-transform duration-300">
-          <PictureComponent className="w-full h-full object-contain filter drop-shadow-sm" />
+        <div className="w-12 h-12 xl:w-13 xl:h-13 shrink-0 flex items-center justify-start group-hover:scale-105 transition-transform duration-300">
+          <PictureComponent className="w-full h-full object-contain filter drop-shadow-xs" />
         </div>
 
-        {/* Content Flow matching Photo 2 */}
+        {/* Content Flow matching Reference scale */}
         <div className="mt-3.5 xl:mt-4 space-y-1.5 xl:space-y-2">
           <h3 className="text-[17.5px] xl:text-[19.5px] font-bold text-[#141f10] tracking-tight font-display leading-[1.2]">
             {option.title}
           </h3>
-          <p className="text-[12.5px] xl:text-[13px] text-[#141f10]/75 font-normal leading-[1.4]">
+          <p className="text-[12.5px] xl:text-[13px] text-[#141f10]/80 font-normal leading-[1.4]">
             {option.description}
           </p>
         </div>
@@ -184,16 +184,16 @@ export function HowCanIHelpSection() {
               </div>
             </div>
 
-            {/* DESKTOP LAYOUT (lg+): Exactly matching Photo 2 */}
-            <div className="hidden lg:grid grid-cols-2 gap-4 xl:gap-5 items-start max-w-fit ml-auto justify-end">
-              {/* Desktop Column 1 (Left): Solve a Business Problem (top) & Collaborate With Me (bottom) */}
-              <div className="flex flex-col gap-4 xl:gap-5 lg:-mt-2 xl:-mt-4">
+            {/* DESKTOP LAYOUT (lg+): Staggered Overlapping Layout with Moderately Larger Scale */}
+            <div className="hidden lg:flex items-start max-w-fit ml-auto justify-end relative">
+              {/* Desktop Column 1 (Left): Learn AI (top) & Workshops & Speaking (bottom) */}
+              <div className="flex flex-col gap-4 xl:gap-5 relative z-10">
                 {renderDesktopCard(desktopCol1[0])}
                 {renderDesktopCard(desktopCol1[1])}
               </div>
 
-              {/* Desktop Column 2 (Right, staggered down): Learn AI (top) & Workshops & Speaking (bottom) */}
-              <div className="flex flex-col gap-4 xl:gap-5 lg:pt-24 xl:pt-28 2xl:pt-32">
+              {/* Desktop Column 2 (Right, staggered down & cascading overlap): Solve a Business Problem (top) & Collaborate With Me (bottom) */}
+              <div className="flex flex-col gap-4 xl:gap-5 pt-18 xl:pt-22 2xl:pt-26 -ml-6 xl:-ml-7 2xl:-ml-8 relative z-20">
                 {renderDesktopCard(desktopCol2[0])}
                 {renderDesktopCard(desktopCol2[1])}
               </div>

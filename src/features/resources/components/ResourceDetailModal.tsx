@@ -148,11 +148,11 @@ export function ResourceDetailModal({
 
             {/* Embedded Player if toggled */}
             {showEmbeddedPlayer && embedUrl && (
-              <div className="mt-3 aspect-video sm:aspect-auto sm:h-[460px] w-full rounded-xl overflow-hidden bg-black border border-slate-800">
+              <div className="mt-3 aspect-video sm:aspect-auto sm:h-[460px] w-full rounded-xl overflow-hidden bg-black border border-slate-800 flex items-center justify-center">
                 <iframe
                   src={embedUrl}
                   title={resource.title}
-                  className="w-full h-full border-0"
+                  className="w-full h-full border-0 object-contain"
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                   allowFullScreen
                 />

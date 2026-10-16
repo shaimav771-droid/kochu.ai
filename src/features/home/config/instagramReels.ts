@@ -4,6 +4,7 @@ export interface InstagramReelItem {
   url: string
   thumbnailUrl: string
   author?: string
+  date?: string
 }
 
 /**
@@ -58,6 +59,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeV7bkdy8r6/',
     thumbnailUrl: '/images/reels/reel-DeV7bkdy8r6.jpg',
     author: '@kochu.ai',
+    date: 'July 10, 2026',
   },
   {
     id: 'DeMgc3iSBSo',
@@ -65,6 +67,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeMgc3iSBSo/',
     thumbnailUrl: '/images/reels/reel-DeMgc3iSBSo.jpg',
     author: '@kochu.ai',
+    date: 'May 31, 2025',
   },
   {
     id: 'DeKhhdTSe3V',
@@ -72,6 +75,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeKhhdTSe3V/',
     thumbnailUrl: '/images/reels/reel-DeKhhdTSe3V.jpg',
     author: '@kochu.ai',
+    date: 'April 18, 2025',
   },
   {
     id: 'DeHfT7LSFXZ',
@@ -79,6 +83,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeHfT7LSFXZ/',
     thumbnailUrl: '/images/reels/reel-DeHfT7LSFXZ.jpg',
     author: '@kochu.ai',
+    date: 'March 14, 2025',
   },
   {
     id: 'DeEh8mLtN_R',
@@ -86,6 +91,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeEh8mLtN_R/',
     thumbnailUrl: '/images/reels/reel-DeEh8mLtN_R.jpg',
     author: '@kochu.ai',
+    date: 'February 22, 2025',
   },
   {
     id: 'DeCDMySS2x7',
@@ -93,6 +99,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DeCDMySS2x7/',
     thumbnailUrl: '/images/reels/reel-DeCDMySS2x7.jpg',
     author: '@kochu.ai',
+    date: 'January 30, 2025',
   },
   {
     id: 'Dd1OAyGypi9',
@@ -100,6 +107,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/Dd1OAyGypi9/',
     thumbnailUrl: '/images/reels/reel-Dd1OAyGypi9.jpg',
     author: '@kochu.ai',
+    date: 'December 18, 2024',
   },
   {
     id: 'DdwL4g2S7Fj',
@@ -107,6 +115,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DdwL4g2S7Fj/',
     thumbnailUrl: '/images/reels/reel-DdwL4g2S7Fj.jpg',
     author: '@kochu.ai',
+    date: 'November 25, 2024',
   },
   {
     id: 'DdtvhYrSJDJ',
@@ -114,6 +123,7 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/DdtvhYrSJDJ/',
     thumbnailUrl: '/images/reels/reel-DdtvhYrSJDJ.jpg',
     author: '@kochu.ai',
+    date: 'October 14, 2024',
   },
   {
     id: 'Ddq9an0S59b',
@@ -121,5 +131,6 @@ export const INSTAGRAM_REELS: InstagramReelItem[] = removeDuplicateReels([
     url: 'https://www.instagram.com/reel/Ddq9an0S59b/',
     thumbnailUrl: '/images/reels/reel-Ddq9an0S59b.jpg',
     author: '@kochu.ai',
+    date: 'September 20, 2024',
   },
 ])

@@ -12,7 +12,9 @@ export function HomePage() {
       <StickyHeroExperience />
 
       {/* SCREEN 3: ABOUT SUHAIL ABDULATIF */}
-      <AboutSection />
+      <div className="relative z-30 bg-[#faf8f2] w-full">
+        <AboutSection />
+      </div>
 
       {/* SCREEN 4: SOCIAL MEDIA (HERO BANNER & PLATFORM CARDS) */}
       <SocialMediaSection />

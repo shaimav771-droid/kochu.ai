@@ -178,16 +178,16 @@ export function YouTubeVideoCarousel({ className }: YouTubeVideoCarouselProps) {
           role="dialog"
           aria-modal="true"
           aria-label={activeVideo.title}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setActiveVideo(null)}
         >
           <div
-            className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            className="relative w-full max-w-4xl max-h-[85vh] bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar with title & close button */}
-            <div className="flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10 text-white">
-              <h4 className="text-sm sm:text-base font-semibold truncate pr-4">
+            <div className="flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10 text-white shrink-0">
+              <h4 className="text-sm sm:text-base font-semibold truncate pr-4 text-white">
                 {activeVideo.title}
               </h4>
               <div className="flex items-center gap-2 shrink-0">
@@ -212,11 +212,11 @@ export function YouTubeVideoCarousel({ className }: YouTubeVideoCarouselProps) {
             </div>
 
             {/* Embedded Responsive 16:9 Iframe */}
-            <div className="relative aspect-video w-full bg-black">
+            <div className="relative aspect-video w-full flex-1 bg-black flex items-center justify-center overflow-hidden">
               <iframe
                 src={getYouTubeEmbedUrl(activeVideo.url)}
                 title={activeVideo.title}
-                className="absolute inset-0 w-full h-full border-0"
+                className="w-full h-full border-0 object-contain"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
