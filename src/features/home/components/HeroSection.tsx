@@ -20,7 +20,7 @@ export function HeroSection() {
     <section
       id="overview"
       data-screen="true"
-      className="relative w-full min-h-[100dvh] md:min-h-fit lg:min-h-[660px] lg:h-screen bg-gradient-to-b from-[#eee9df] via-[#eae5da] to-[#faf8f2] border-b border-[#ded7c8] overflow-x-hidden flex flex-col justify-center py-16 md:py-0 pb-16 md:pb-6 lg:pb-0 scroll-mt-0"
+      className="relative w-full min-h-[100dvh] md:min-h-fit lg:min-h-[660px] lg:h-screen bg-gradient-to-b from-[#eee9df] via-[#eae5da] to-[#faf8f2] border-b border-[#ded7c8] overflow-x-hidden flex flex-col justify-between md:justify-center pt-20 sm:pt-24 pb-6 sm:pb-8 md:py-0 md:pb-6 lg:pb-0 scroll-mt-0"
     >
       {/* TOP BAR: BRAND LOGO + NAVIGATION (Responsive) */}
       <div className="absolute top-4 sm:top-6 left-0 right-0 z-40 px-5 sm:px-8 lg:px-10 max-w-7xl mx-auto flex items-center justify-between">
@@ -168,35 +168,35 @@ export function HeroSection() {
       </div>
 
       {/* Main Hero Content */}
-      <div className="relative z-20 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-8 pt-0 md:pt-28 pb-0 lg:py-12 my-auto h-auto">
+      <div className="relative z-20 max-w-[1360px] mx-auto w-full px-5 sm:px-8 lg:px-8 pt-2 sm:pt-4 md:pt-28 lg:pt-36 lg:pb-12 md:my-auto h-auto flex-1 flex flex-col justify-between md:block">
         
         {/* MOBILE STACKED LAYOUT (< lg:):
-            1. Main Heading
-            2. Photo of Suhail gracefully below it, centered with balanced size
-            3. "Hey, I'm Suhail 👋" and the subtitle placed cleanly below with dedicated mt-6 / mt-8 gap
+            1. Main Heading placed nicely with dedicated top breathing room below kochu.ai
+            2. Photo of Suhail enlarged with balanced proportions
+            3. "Hey, I'm Suhail 👋" placed down to fully fill the mobile screen
         */}
-        <div className="lg:hidden flex flex-col items-center justify-start w-full text-left min-h-fit h-auto pb-0">
+        <div className="lg:hidden flex flex-col items-center justify-between w-full text-left flex-1 h-full min-h-[calc(100dvh-7.5rem)]">
           {/* 1. Main Heading */}
-          <div className="w-full text-left">
-            <h1 className="text-[34px] min-[360px]:text-[38px] sm:text-5xl md:text-[54px] font-normal tracking-tight text-[#141f10] leading-[1.06] sm:leading-tight font-serif">
-              <span className="font-dm-serif" style={{ fontFamily: '"DM Serif Display", serif' }}>Turning</span> <br className="hidden sm:inline" />
+          <div className="w-full text-left pt-1 min-[380px]:pt-2.5">
+            <h1 className="text-[38px] min-[360px]:text-[42px] min-[400px]:text-[46px] sm:text-5xl md:text-[54px] font-normal tracking-tight text-[#141f10] leading-[1.04] sm:leading-tight font-serif">
+              <span className="font-dm-serif" style={{ fontFamily: '"DM Serif Display", serif' }}>Turning</span> <br />
               <span className="italic font-serif font-light text-[#7bc943]">AI into real-world</span>{' '}
-              <br className="hidden sm:inline" />
+              <br />
               <span className="font-semibold font-serif">products.</span>
             </h1>
           </div>
 
-          {/* 2. Centered Photo of Suhail with controlled size and bottom margin */}
-          <div className="w-full flex justify-center items-center mt-3 sm:mt-5 mb-1.5 sm:mb-2">
+          {/* 2. Centered Photo of Suhail with enlarged size and full vertical fill */}
+          <div className="w-full flex justify-center items-center my-auto py-1 sm:py-2">
             <img
               src="/images/kochu-portrait.png"
               alt="Suhail - Kochu.ai Creator & Educator"
-              className="w-[72%] max-w-[260px] sm:max-w-[340px] aspect-auto object-contain drop-shadow-[0_16px_32px_rgba(20,31,16,0.18)] select-none pointer-events-none"
+              className="w-full max-w-[380px] min-[400px]:max-w-[430px] sm:max-w-[490px] max-h-[55vh] sm:max-h-[60vh] aspect-auto object-contain drop-shadow-[0_20px_45px_rgba(20,31,16,0.22)] select-none pointer-events-none"
             />
           </div>
 
-          {/* 3. Intro Text & Description directly in normal document flow with comfortable gap */}
-          <div className="w-full text-left space-y-2 max-w-xl mt-3 sm:mt-5 pb-0">
+          {/* 3. Intro Text & Description placed down to fill the screen */}
+          <div className="w-full text-left space-y-2 max-w-xl pt-1 pb-2">
             <h2
               className="text-2xl sm:text-3xl italic text-[#141f10] font-normal tracking-tight font-serif"
               style={{ fontFamily: '"DM Serif Display", serif' }}
@@ -210,12 +210,12 @@ export function HeroSection() {
         </div>
 
         {/* DESKTOP EDITORIAL LAYOUT (lg:grid):
-            Split layout with stationary center portrait in StickyHeroExperience
+            Split layout with stationary center portrait in StickyHeroExperience (4 / 3 / 5 cols matching Screen 2)
         */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-8 items-center">
-          {/* LEFT COLUMN: Editorial Headline */}
-          <div className="lg:col-span-5 z-20 text-left -mt-12">
-            <h1 className="text-6xl lg:text-7xl xl:text-[80px] font-normal tracking-tight text-[#141f10] leading-[0.96] font-serif">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-center">
+          {/* LEFT COLUMN: Editorial Headline placed down with comfortable clearance */}
+          <div className="lg:col-span-4 xl:col-span-4 z-20 text-left pt-2 xl:pt-4">
+            <h1 className="text-5xl lg:text-6xl xl:text-[76px] font-normal tracking-tight text-[#141f10] leading-[0.96] font-serif">
               <span className="font-dm-serif" style={{ fontFamily: '"DM Serif Display", serif' }}>Turning</span> <br />
               <span className="italic font-serif font-light text-[#7bc943]">AI into real-world</span> <br />
               <span className="font-semibold font-serif">products.</span>
@@ -223,10 +223,10 @@ export function HeroSection() {
           </div>
 
           {/* MIDDLE SPACER FOR STATIONARY CENTERED PORTRAIT */}
-          <div className="lg:col-span-3 pointer-events-none" />
+          <div className="lg:col-span-3 xl:col-span-3 pointer-events-none" />
 
           {/* RIGHT COLUMN: Intro Text & Description Writing */}
-          <div className="lg:col-span-4 z-20 text-left max-w-md lg:ml-auto space-y-3 pt-36">
+          <div className="lg:col-span-5 xl:col-span-5 z-20 text-left max-w-md lg:ml-auto space-y-3 pt-24 xl:pt-28">
             <h2
               className="text-3xl sm:text-4xl italic text-[#141f10] font-normal tracking-tight"
               style={{ fontFamily: '"DM Serif Display", serif' }}

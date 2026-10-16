@@ -48,7 +48,7 @@ function PhotoCard({
   return (
     <div
       className={cn(
-        'group relative overflow-hidden rounded-2xl sm:rounded-3xl aspect-[4/5] select-none transition-all duration-500 hover:scale-[1.03] shadow-[0_12px_30px_-10px_rgba(20,31,16,0.08)] hover:shadow-[0_20px_40px_-10px_rgba(20,31,16,0.14)]',
+        'group relative overflow-hidden rounded-2xl sm:rounded-3xl lg:rounded-2xl xl:rounded-3xl aspect-[4/4.8] lg:aspect-[4/4.5] xl:aspect-[4/4.7] select-none transition-all duration-500 hover:scale-[1.03] shadow-[0_12px_30px_-10px_rgba(20,31,16,0.08)] hover:shadow-[0_20px_40px_-10px_rgba(20,31,16,0.14)]',
         className
       )}
       style={{
@@ -83,13 +83,13 @@ export function AboutPhotoGrid({ className }: AboutPhotoGridProps) {
       {/* Alternating / Staggered 2-column photo layout */}
       <div className="relative grid grid-cols-2 gap-3 sm:gap-4 xl:gap-5 w-full max-w-[380px] sm:max-w-[460px] xl:max-w-[500px] items-start">
         {/* Left Sub-column: Shifted up */}
-        <div className="flex flex-col gap-3 sm:gap-4 xl:gap-5 -mt-3 sm:-mt-6 lg:-mt-8">
+        <div className="flex flex-col gap-3 sm:gap-4 xl:gap-5 -mt-3 sm:-mt-6 lg:-mt-6 xl:-mt-8">
           <PhotoCard photo={LEFT_COLUMN_PHOTOS[0]} />
           <PhotoCard photo={LEFT_COLUMN_PHOTOS[1]} />
         </div>
 
         {/* Right Sub-column: Alternating / Shifted down */}
-        <div className="flex flex-col gap-3 sm:gap-4 xl:gap-5 pt-4 sm:pt-7 lg:pt-10">
+        <div className="flex flex-col gap-3 sm:gap-4 xl:gap-5 pt-3 sm:pt-6 lg:pt-6 xl:pt-9">
           <PhotoCard photo={RIGHT_COLUMN_PHOTOS[0]} />
           <PhotoCard photo={RIGHT_COLUMN_PHOTOS[1]} />
         </div>

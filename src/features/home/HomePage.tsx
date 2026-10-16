@@ -8,14 +8,13 @@ export function HomePage() {
 
   return (
     <div className="relative w-full">
-
-      {/* SECTION 1 & 2: STICKY PORTRAIT SCROLLING EXPERIENCE (HERO & HOW CAN I HELP YOU) */}
+      {/* SCREENS 1 & 2: STICKY PORTRAIT EXPERIENCE (HERO & HOW CAN I HELP YOU) */}
       <StickyHeroExperience />
 
-      {/* SECTION 3: ABOUT SUHAIL ABDULATIF */}
+      {/* SCREEN 3: ABOUT SUHAIL ABDULATIF */}
       <AboutSection />
 
-      {/* SECTION 4: SOCIAL MEDIA (HERO BANNER & PLATFORM CARDS) */}
+      {/* SCREEN 4: SOCIAL MEDIA (HERO BANNER & PLATFORM CARDS) */}
       <SocialMediaSection />
     </div>
   )
