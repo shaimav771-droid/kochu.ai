@@ -23,13 +23,13 @@ export function Input({
   return (
     <div className="flex flex-col gap-1.5 w-full text-left">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-bold uppercase tracking-wider text-[#2e3b26]">
+        <label htmlFor={inputId} className="text-xs font-semibold uppercase tracking-wider text-[#4D2A00]/90">
           {label}
         </label>
       )}
       <div className="relative flex items-center">
         {leftIcon && (
-          <span className="absolute left-3.5 text-[#5e6d56] pointer-events-none flex items-center">
+          <span className="absolute left-3.5 text-[#72450C] pointer-events-none flex items-center">
             {leftIcon}
           </span>
         )}
@@ -37,11 +37,11 @@ export function Input({
           id={inputId}
           aria-invalid={Boolean(error)}
           className={cn(
-            'w-full bg-white border rounded-xl px-4 py-2.5 text-sm text-[#182213] placeholder:text-[#889681]',
-            'transition-colors duration-200 outline-none',
-            'focus:ring-2 focus:ring-[#7bc943]/30 focus:border-[#7bc943]',
-            leftIcon ? 'pl-10' : 'pl-4',
-            error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-[#ded7c7] hover:border-[#cbcaa0]',
+            'w-full bg-[#FFFDF8] border rounded-[6px] px-3.5 py-2.5 text-sm text-[#4D2A00] placeholder:text-[#9C7954]',
+            'transition-colors duration-150 outline-none',
+            'focus:ring-2 focus:ring-[#CC6F00]/30 focus:border-[#CC6F00]',
+            leftIcon ? 'pl-10' : 'pl-3.5',
+            error ? 'border-red-600 focus:border-red-600 focus:ring-red-600/20' : 'border-[#E8DCBD] hover:border-[#CC6F00]/60',
             className
           )}
           {...props}
@@ -50,7 +50,7 @@ export function Input({
       {error ? (
         <span className="text-xs text-red-600 font-medium">{error}</span>
       ) : helperText ? (
-        <span className="text-xs text-[#5e6d56]">{helperText}</span>
+        <span className="text-xs text-[#72450C]">{helperText}</span>
       ) : null}
     </div>
   )

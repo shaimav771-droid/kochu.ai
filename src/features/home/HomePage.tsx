@@ -1,27 +1,46 @@
-import { StickyHeroExperience } from './components/StickyHeroExperience'
-import { AboutSection } from './components/AboutSection'
-import { SocialMediaSection } from './components/SocialMediaSection'
-import { PromptLibrarySection } from '@/features/prompts/components/PromptLibrarySection'
-import { useFullPageScroll } from './hooks/useFullPageScroll'
+import { HeroSection } from './components/HeroSection'
+import { CredibilityStrip } from './components/CredibilityStrip'
+import { HowCanIHelpSection } from './components/HowCanIHelpSection'
+import { BusinessImpactSection } from './components/BusinessImpactSection'
+import { PriorityProgrammeSection } from './components/PriorityProgrammeSection'
+import { AilutionsTransformationSection } from './components/AilutionsTransformationSection'
+import { TrainingSpeakingSection } from './components/TrainingSpeakingSection'
+import { AboutSummarySection } from './components/AboutSummarySection'
+import { KochuAiPreviewSection } from './components/KochuAiPreviewSection'
+import { ClosingInvitationSection } from './components/ClosingInvitationSection'
 
 export function HomePage() {
-  useFullPageScroll()
-
   return (
-    <div className="relative w-full">
-      {/* SCREENS 1 & 2: STICKY PORTRAIT EXPERIENCE (HERO & HOW CAN I HELP YOU) */}
-      <StickyHeroExperience />
+    <div className="relative w-full overflow-x-hidden">
+      {/* 1. Hero: Coherent Text Block & Suhail's Portrait */}
+      <HeroSection />
 
-      {/* SCREEN 3: ABOUT SUHAIL ABDULATIF */}
-      <div className="relative z-30 bg-[#faf8f2] w-full">
-        <AboutSection />
-      </div>
+      {/* 2. Credibility Strip: Proof figures & Client organisations */}
+      <CredibilityStrip />
 
-      {/* SCREEN 4: SOCIAL MEDIA (HERO BANNER & PLATFORM CARDS) */}
-      <SocialMediaSection />
+      {/* 3. How Can I Help You: 4 clear, substantial routes */}
+      <HowCanIHelpSection />
 
-      {/* DEDICATED SECTION: AI PROMPT LIBRARY */}
-      <PromptLibrarySection />
+      {/* 4. Business Impact: Real case stories (Maps & Vogs, Nesto, Sabco, MIF Capital) */}
+      <BusinessImpactSection />
+
+      {/* 5. Priority Programme: 1% AI Club */}
+      <PriorityProgrammeSection />
+
+      {/* 6. Business Transformation: Ailutions, 90-Day Programme & AI Champions */}
+      <AilutionsTransformationSection />
+
+      {/* 7. Training & Speaking: Real session photography, factual captions & audiences */}
+      <TrainingSpeakingSection />
+
+      {/* 8. About Suhail: Business background, physics, operations & ethics */}
+      <AboutSummarySection />
+
+      {/* 9. Kochu.ai Preview: Intentional green-themed education & content island */}
+      <KochuAiPreviewSection />
+
+      {/* 10. Closing Invitation: Strongest priority for Consultation */}
+      <ClosingInvitationSection />
     </div>
   )
 }

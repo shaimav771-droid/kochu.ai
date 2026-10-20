@@ -2,7 +2,9 @@ export interface InstagramReelItem {
   id: string
   title: string
   url: string
+  instagramUrl?: string
   thumbnailUrl: string
+  views?: string
   author?: string
   date?: string
 }

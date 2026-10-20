@@ -13,64 +13,59 @@
     overflow-x: hidden;
   }
 
-  /* Disable scroll-snap-type on mobile for smooth, natural scrolling */
-  @media (max-width: 768px) {
-    html, body {
-      scroll-snap-type: none !important;
-    }
-  }
-
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #faf8f2;
-    color: #1a2415;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    background-color: #FAF5E8;
+    color: #4D2A00;
+    line-height: 1.6;
   }
 
-  h1, h2, h3, h4, .font-display {
-    font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-    color: #141f10;
+  h1, h2, h3, h4, .font-display, .font-serif, .font-editorial {
+    font-family: 'Newsreader', Georgia, serif;
+    color: #4D2A00;
   }
 
-  .font-editorial, .font-serif {
-    font-family: 'Instrument Serif', Georgia, serif;
-  }
-
-  .font-dm-serif {
-    font-family: 'DM Serif Display', Georgia, serif;
-  }
-
-  .font-handwriting {
-    font-family: 'Caveat', cursive;
+  .font-sans {
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
   }
 }
 
-/* Cream & #7bc943 Theme Utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(123, 201, 67, 0.22);
+/* Suhail Abdulatif Editorial Theme System */
+:root {
+  --color-cream: #F9E6A8;
+  --color-cream-light: #FAF5E8;
+  --color-cream-surface: #FFFDF8;
+  --color-amber: #F2A900;
+  --color-orange: #CC6F00;
+  --color-brown: #4D2A00;
+  --color-brown-muted: #6E4413;
+  --color-border-subtle: #E8DCBD;
 }
 
-.glass-panel-hover {
-  transition: all 0.25s ease-in-out;
-}
-.glass-panel-hover:hover {
-  background: #ffffff;
-  border-color: rgba(123, 201, 67, 0.45);
-  box-shadow: 0 12px 32px -8px rgba(123, 201, 67, 0.18);
+/* Clean Editorial Surfaces (No excessive glowing or glass effects) */
+.editorial-panel {
+  background: #FFFDF8;
+  border: 1px solid #E8DCBD;
+  border-radius: 8px;
 }
 
-.brand-green-gradient {
-  background: linear-gradient(135deg, #88d44e 0%, #7bc943 50%, #64af30 100%);
+.editorial-panel-hover {
+  transition: all 0.2s ease-in-out;
+}
+.editorial-panel-hover:hover {
+  background: #FFFFFF;
+  border-color: #CC6F00;
 }
 
-.brand-green-glow {
-  box-shadow: 0 8px 30px -6px rgba(123, 201, 67, 0.35);
+/* Kochu.ai Theme Isolated Sub-System (Preserved for Kochu.ai Area and Page) */
+.kochu-theme {
+  --kochu-green: #7BC943;
+  --kochu-green-dark: #2C5C13;
+  --kochu-bg: #FAF8F2;
 }
 
-.brand-green-text-gradient {
-  background: linear-gradient(135deg, #3d791b 0%, #7bc943 55%, #2a5812 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.kochu-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(123, 201, 67, 0.28);
+  border-radius: 12px;
 }

@@ -34,10 +34,10 @@ export function ResourcesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <Link
             to={ROUTES.HOME}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#45573e] hover:text-[#74C640] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#4D2A00] hover:text-[#CC6F00] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Kochu.ai</span>
+            <span>Back to Suhail Abdulatif</span>
           </Link>
 
           <div className="flex items-center gap-2">

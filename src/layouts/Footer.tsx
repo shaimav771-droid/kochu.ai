@@ -1,62 +1,64 @@
-import { Mail, ExternalLink, Heart, Sparkles } from 'lucide-react'
+import { Mail, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { InstagramIcon, YoutubeIcon, LinkedinIcon } from '@/shared/ui/Icons'
 import { SITE_CONFIG } from '@/shared/lib/config/siteConfig'
 import { ROUTES } from '@/shared/lib/config/routes'
+import { useAppStore } from '@/shared/lib/store/useAppStore'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const { openConsultationModal, openSessionEnquiryModal } = useAppStore()
 
   return (
-    <footer className="border-t border-[#e2dccf] bg-[#f4efe4] text-[#4d5c45] mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-left">
-          {/* Brand Info */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#7bc943] flex items-center justify-center font-bold text-slate-950 font-display">
-                K
-              </div>
-              <span className="text-xl font-bold text-[#141f10] font-display tracking-tight">
+    <footer className="bg-[#4D2A00] text-[#FAF5E8] border-t border-[#3D2100] mt-24">
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 text-left">
+          {/* Identity & Strategic Focus */}
+          <div className="md:col-span-5 space-y-4">
+            <div>
+              <span className="text-2xl font-serif font-semibold text-[#F9E6A8] tracking-tight block">
                 {SITE_CONFIG.name}
               </span>
+              <p className="text-xs font-mono uppercase tracking-wider text-[#F2A900] mt-1">
+                {SITE_CONFIG.roles.join(' • ')}
+              </p>
             </div>
-            <p className="text-sm text-[#4d5c45] max-w-md leading-relaxed">
-              Empowering Kerala's Malayalam-speaking engineers, creators, and students to master
-              Artificial Intelligence, modern web tech, and developer tools. High-impact commercial
-              collaborations and authentic brand storytelling.
+
+            <p className="text-sm text-[#FAF5E8]/80 max-w-md leading-relaxed">
+              Entrepreneur, AI Transformation Consultant, and trainer of entrepreneurs, senior executives, and enterprise teams. Connecting business understanding with practical everyday AI adoption.
             </p>
+
             <div className="flex items-center gap-3 pt-2">
               <a
-                href={SITE_CONFIG.instagram}
+                href={SITE_CONFIG.kochu.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white border border-[#ded7c7] flex items-center justify-center text-[#3a4933] hover:text-[#2c5a13] hover:border-[#7bc943] transition-colors shadow-sm"
-                aria-label="Instagram"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={SITE_CONFIG.youtube}
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white border border-[#ded7c7] flex items-center justify-center text-[#3a4933] hover:text-[#2c5a13] hover:border-[#7bc943] transition-colors shadow-sm"
-                aria-label="YouTube"
-              >
-                <YoutubeIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={SITE_CONFIG.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white border border-[#ded7c7] flex items-center justify-center text-[#3a4933] hover:text-[#2c5a13] hover:border-[#7bc943] transition-colors shadow-sm"
+                className="w-10 h-10 rounded-[6px] bg-[#3B2000] border border-[#6E3F05] flex items-center justify-center text-[#F9E6A8] hover:text-[#F2A900] hover:border-[#F2A900] transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a
+                href={SITE_CONFIG.kochu.youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-[6px] bg-[#3B2000] border border-[#6E3F05] flex items-center justify-center text-[#F9E6A8] hover:text-[#F2A900] hover:border-[#F2A900] transition-colors"
+                aria-label="YouTube"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a
+                href={SITE_CONFIG.kochu.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-[6px] bg-[#3B2000] border border-[#6E3F05] flex items-center justify-center text-[#F9E6A8] hover:text-[#F2A900] hover:border-[#F2A900] transition-colors"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
                 href={`mailto:${SITE_CONFIG.contactEmail}`}
-                className="w-10 h-10 rounded-xl bg-white border border-[#ded7c7] flex items-center justify-center text-[#3a4933] hover:text-[#2c5a13] hover:border-[#7bc943] transition-colors shadow-sm"
+                className="w-10 h-10 rounded-[6px] bg-[#3B2000] border border-[#6E3F05] flex items-center justify-center text-[#F9E6A8] hover:text-[#F2A900] hover:border-[#F2A900] transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-4 h-4" />
@@ -64,71 +66,90 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-[#141f10] uppercase tracking-wider font-mono">
-              Page Sections & Hubs
+          {/* Navigation Links */}
+          <div className="md:col-span-3 space-y-3.5">
+            <h4 className="text-xs font-semibold text-[#F2A900] uppercase tracking-wider font-mono">
+              Website Navigation
             </h4>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2.5 text-sm text-[#FAF5E8]/85">
               <li>
-                <Link
-                  to={ROUTES.RESOURCES}
-                  className="inline-flex items-center gap-1.5 text-[#295711] font-bold hover:text-[#193a0a] transition-colors"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#74C640]" />
-                  <span>Free Resources & Prompts</span>
+                <Link to={ROUTES.ABOUT} className="hover:text-[#F9E6A8] transition-colors">
+                  About Suhail
                 </Link>
               </li>
               <li>
-                <a href="/#overview" className="hover:text-[#295711] transition-colors">
-                  Overview & Stats
-                </a>
+                <Link to={ROUTES.WORK_WITH_ME} className="hover:text-[#F9E6A8] transition-colors">
+                  Work With Me & Advisory
+                </Link>
               </li>
               <li>
-                <a href="/#media-kit" className="hover:text-[#295711] transition-colors">
-                  Media Kit & Demographics
-                </a>
+                <Link to={ROUTES.PROGRAMMES} className="hover:text-[#F9E6A8] transition-colors">
+                  Programmes (1% AI Club)
+                </Link>
               </li>
               <li>
-                <a href="/#brand-collabs" className="hover:text-[#295711] transition-colors">
-                  Brand Collabs & Rate Card
-                </a>
+                <Link to={ROUTES.BUSINESS_IMPACT} className="hover:text-[#F9E6A8] transition-colors">
+                  Business Impact & Case Studies
+                </Link>
               </li>
               <li>
-                <a href="/#education" className="hover:text-[#295711] transition-colors">
-                  AI Cohorts & Bootcamps
-                </a>
+                <Link to={ROUTES.KOCHU_AI} className="hover:text-[#F9E6A8] transition-colors flex items-center gap-1.5">
+                  <span>Kochu.ai Platform</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7BC943]" />
+                </Link>
+              </li>
+              <li>
+                <Link to={ROUTES.RESOURCES} className="hover:text-[#F9E6A8] transition-colors">
+                  Free Resources & Prompts
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Community & Contact */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-[#141f10] uppercase tracking-wider font-mono">
-              Direct Contact
+          {/* Engagement Direct Routes */}
+          <div className="md:col-span-4 space-y-3.5">
+            <h4 className="text-xs font-semibold text-[#F2A900] uppercase tracking-wider font-mono">
+              Direct Engagement
             </h4>
-            <p className="text-sm text-[#4d5c45]">
-              For sponsorships, agency briefs, keynotes, or workshop bookings:
+            <p className="text-sm text-[#FAF5E8]/80 leading-relaxed">
+              Explore strategic consultation, executive briefings, corporate team workshops, or transformation advisory through Ailutions.
             </p>
-            <a
-              href={`mailto:${SITE_CONFIG.contactEmail}`}
-              className="inline-flex items-center gap-1.5 text-[#295711] hover:text-[#1e420b] text-sm font-bold group"
-            >
-              {SITE_CONFIG.contactEmail}
-              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-            <div className="pt-2 text-xs text-[#627359]">
-              Response time: Under 24 business hours
+
+            <div className="pt-1 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={openConsultationModal}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#F2A900] hover:text-[#FAF5E8] transition-colors cursor-pointer text-left"
+              >
+                <span>Book a Consultation</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => openSessionEnquiryModal('Corporate & Leadership')}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#F2A900] hover:text-[#FAF5E8] transition-colors cursor-pointer text-left"
+              >
+                <span>Enquire About a Team Workshop</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+              <a
+                href={`mailto:${SITE_CONFIG.contactEmail}`}
+                className="inline-flex items-center gap-1.5 text-sm text-[#FAF5E8]/70 hover:text-[#F9E6A8] transition-colors text-left"
+              >
+                <span>{SITE_CONFIG.contactEmail}</span>
+              </a>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#ded7c7] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#627359]">
+        <div className="border-t border-[#6E3F05] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#FAF5E8]/60">
           <p>© {currentYear} {SITE_CONFIG.name}. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built with <Heart className="w-3.5 h-3.5 text-[#7bc943] fill-[#7bc943]" /> for the Kerala & Global Malayalam Tech Community.
-          </p>
+          <div className="flex items-center gap-4">
+            <span>Ailutions • Co-founder & COO</span>
+            <span>•</span>
+            <span>Kochu.ai • Creator</span>
+          </div>
         </div>
       </div>
     </footer>

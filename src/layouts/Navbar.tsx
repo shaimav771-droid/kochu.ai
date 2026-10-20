@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Sparkles, ArrowUpRight, Menu, X, BookOpen } from 'lucide-react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 import { SITE_CONFIG } from '@/shared/lib/config/siteConfig'
 import { ROUTES } from '@/shared/lib/config/routes'
 import { Button } from '@/shared/ui/Button'
@@ -8,159 +8,144 @@ import { useAppStore } from '@/shared/lib/store/useAppStore'
 import { cn } from '@/shared/lib/utils/cn'
 
 export function Navbar() {
-  const { openBookingModal } = useAppStore()
+  const { openConsultationModal } = useAppStore()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('overview')
   const location = useLocation()
-  const navigate = useNavigate()
 
-  const isHome = location.pathname === ROUTES.HOME
-
-  const navItems = [
-    { label: 'Overview', id: 'overview' },
-    { label: 'Media Kit', id: 'media-kit' },
-    { label: 'Brand Collabs', id: 'brand-collabs' },
-    { label: 'Education & Cohorts', id: 'education' },
+  const navLinks = [
+    { label: 'About', path: ROUTES.ABOUT },
+    { label: 'Work With Me', path: ROUTES.WORK_WITH_ME },
+    { label: 'Programmes', path: ROUTES.PROGRAMMES },
+    { label: 'Business Impact', path: ROUTES.BUSINESS_IMPACT },
+    { label: 'Kochu.ai', path: ROUTES.KOCHU_AI },
   ]
 
-  useEffect(() => {
-    if (!isHome) return
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200
-
-      for (let i = navItems.length - 1; i >= 0; i--) {
-        const item = navItems[i]
-        const element = document.getElementById(item.id)
-        if (element && element.offsetTop <= scrollPosition) {
-          setActiveSection(item.id)
-          break
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [navItems, isHome])
-
-  const handleNavClick = (id: string) => {
-    setMobileMenuOpen(false)
-    if (!isHome) {
-      navigate(`/#${id}`)
-      return
-    }
-
-    setActiveSection(id)
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#faf8f2]/90 border-b border-[#e6e0d2]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo */}
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#FAF5E8]/95 border-b border-[#E8DCBD]">
+      <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
+        {/* Brand Identity */}
         <Link
           to={ROUTES.HOME}
           className="flex items-center gap-3 group text-left cursor-pointer"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8ad450] to-[#6cb935] flex items-center justify-center shadow-md shadow-[#7bc943]/20 group-hover:scale-105 transition-transform text-white">
-            <span className="font-bold text-white text-xl font-display">K</span>
-          </div>
           <div className="flex flex-col text-left">
-            <span className="text-lg font-bold tracking-tight text-[#141f10] flex items-center gap-1.5 font-display">
+            <span className="text-xl sm:text-[22px] font-serif font-semibold tracking-tight text-[#4D2A00]">
               {SITE_CONFIG.name}
-              <span className="w-2 h-2 rounded-full bg-[#7bc943] animate-pulse" />
             </span>
-            <span className="text-[11px] font-mono text-[#3e781e] font-semibold uppercase tracking-widest -mt-1">
-              Tech Education
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#72450C] font-semibold -mt-0.5">
+              AI Transformation & Advisory
             </span>
           </div>
         </Link>
 
-        {/* Action Buttons */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            to={ROUTES.RESOURCES}
-            className={cn(
-              'inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs',
-              location.pathname === ROUTES.RESOURCES
-                ? 'bg-[#74C640] text-white border-[#74C640] shadow-sm'
-                : 'bg-white text-[#2c5c13] border-[#d8eed0] hover:border-[#74C640] hover:text-[#1e420d]'
-            )}
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Free Resources & Prompts</span>
-          </Link>
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-7">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path
+            const isKochu = link.path === ROUTES.KOCHU_AI
 
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'text-[15px] font-medium transition-colors cursor-pointer py-1 relative',
+                  isActive
+                    ? 'text-[#4D2A00] font-semibold'
+                    : 'text-[#4D2A00]/75 hover:text-[#4D2A00]',
+                  isKochu && 'inline-flex items-center gap-1.5'
+                )}
+              >
+                <span>{link.label}</span>
+                {isKochu && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#7BC943]" title="Kochu.ai Platform" />
+                )}
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#CC6F00]" />
+                )}
+              </Link>
+            )
+          })}
+        </nav>
+
+        {/* Primary Action Button */}
+        <div className="hidden sm:flex items-center gap-3">
           <Button
             variant="primary"
-            size="sm"
-            onClick={() => openBookingModal()}
-            rightIcon={<ArrowUpRight className="w-4 h-4" />}
+            size="md"
+            onClick={openConsultationModal}
+            rightIcon={<ArrowUpRight className="w-4 h-4 text-[#4D2A00]" />}
           >
-            Partner With Us
+            Book a Consultation
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile Hamburger Button */}
+        <div className="lg:hidden flex items-center gap-2">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={openConsultationModal}
+            className="sm:hidden text-xs px-3 py-1.5"
+          >
+            Consultation
+          </Button>
+
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-[#2f3c27] hover:bg-[#ede7d8]"
-            aria-label="Toggle menu"
+            className="p-2 rounded-[6px] text-[#4D2A00] hover:bg-[#F0E6CE] border border-[#E8DCBD] transition-colors"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#e4ded0] bg-[#fbfaf6] px-4 pt-2 pb-6 space-y-2">
-          <Link
-            to={ROUTES.RESOURCES}
-            onClick={() => setMobileMenuOpen(false)}
-            className={cn(
-              'w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-base font-bold transition-colors',
-              location.pathname === ROUTES.RESOURCES
-                ? 'bg-[#74C640] text-white'
-                : 'bg-[#ebf8e3] text-[#295711] border border-[#74C640]/30'
-            )}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>Free Resources & Prompts Library</span>
-          </Link>
+        <div className="lg:hidden border-b border-[#E8DCBD] bg-[#FAF5E8] px-5 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-150">
+          <nav className="flex flex-col space-y-1">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={cn(
+                    'w-full text-left px-3.5 py-2.5 rounded-[6px] text-base font-medium transition-colors',
+                    isActive
+                      ? 'bg-[#F2E5C7] text-[#4D2A00] font-semibold border-l-2 border-[#CC6F00]'
+                      : 'text-[#4D2A00]/80 hover:bg-[#F2E5C7]/60 hover:text-[#4D2A00]'
+                  )}
+                >
+                  <span className="flex items-center justify-between">
+                    <span>{link.label}</span>
+                    {link.path === ROUTES.KOCHU_AI && (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-[#7BC943]/20 text-[#2C5C13] font-mono">
+                        Platform
+                      </span>
+                    )}
+                  </span>
+                </Link>
+              )
+            })}
+          </nav>
 
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => handleNavClick(item.id)}
-              className={cn(
-                'w-full text-left px-3 py-2.5 rounded-lg text-base font-medium transition-colors',
-                isHome && activeSection === item.id
-                  ? 'bg-white text-[#295711] font-bold border border-[#7bc943]/40'
-                  : 'text-[#45543d] hover:bg-[#ede7d9]'
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
-          <div className="pt-2">
+          <div className="pt-3 border-t border-[#E8DCBD]">
             <Button
               variant="primary"
               size="md"
-              className="w-full"
+              className="w-full justify-center"
               onClick={() => {
                 setMobileMenuOpen(false)
-                openBookingModal()
+                openConsultationModal()
               }}
-              rightIcon={<Sparkles className="w-4 h-4" />}
+              rightIcon={<ArrowUpRight className="w-4 h-4 text-[#4D2A00]" />}
             >
-              Partner With Us
+              Book a Consultation
             </Button>
           </div>
         </div>
@@ -168,4 +153,3 @@ export function Navbar() {
     </header>
   )
 }
-
