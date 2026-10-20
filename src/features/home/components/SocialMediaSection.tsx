@@ -1,7 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Sparkles, ArrowRight } from 'lucide-react'
 import { SITE_CONFIG } from '@/shared/lib/config/siteConfig'
-import { ROUTES } from '@/shared/lib/config/routes'
 import {
   InstagramBadgeIcon,
   YouTubeBadgeIcon,
@@ -66,8 +63,8 @@ export function SocialMediaSection({ className }: SocialMediaSectionProps) {
         id="social-platforms"
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-14 w-full h-full flex flex-col justify-between"
       >
-        {/* HEADER AREA: TOP LEFT CORNER WITH RESOURCES CTA */}
-        <div className="relative text-left w-full pt-1 sm:pt-2 mb-3 sm:mb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        {/* HEADER AREA: TOP LEFT CORNER */}
+        <div className="relative text-left w-full pt-1 sm:pt-2 mb-3 sm:mb-4">
           {/* Heading with 2 lines */}
           <div>
             <h2
@@ -84,16 +81,6 @@ export function SocialMediaSection({ className }: SocialMediaSectionProps) {
               </span>
             </div>
           </div>
-
-          {/* Quick link to Prompts & Resources Library */}
-          <Link
-            to={ROUTES.RESOURCES}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#d8eed0] hover:border-[#74C640] text-xs font-bold text-[#2c5c13] hover:bg-[#f7fbf5] transition-all shadow-2xs hover:shadow-xs group self-start sm:self-auto"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#74C640]" />
-            <span>Free Prompts &amp; Resources</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
         </div>
 
         {/* TWO HORIZONTAL ROWS: INSTAGRAM REELS (TOP) & YOUTUBE VIDEOS (BOTTOM) */}

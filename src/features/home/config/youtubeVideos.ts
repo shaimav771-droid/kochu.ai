@@ -2,6 +2,7 @@ export interface YouTubeVideoItem {
   id: string
   title: string
   url: string // Full watch URL (e.g. 'https://www.youtube.com/watch?v=...') or short URL ('https://youtu.be/...')
+  date?: string
 }
 
 /**
@@ -63,16 +64,19 @@ export const YOUTUBE_VIDEOS: YouTubeVideoItem[] = removeDuplicateVideos([
     id: '6SHw8_RScog',
     title: 'IMAGEൽ നിന്ന് Ai വീഡിയോ എങ്ങനെ ഉണ്ടാക്കാം',
     url: 'https://youtu.be/6SHw8_RScog',
+    date: 'August 14, 2026',
   },
   {
     id: 'c3ZjThN9dZQ',
     title: 'ChatGPT ഫീച്ചറുകളും ടൂളുകളും | ChatGPT Features & Tools Explained | മലയാളം',
     url: 'https://youtu.be/c3ZjThN9dZQ',
+    date: 'July 28, 2026',
   },
   {
     id: 'YSZioQKrHJE',
     title: 'Product Photography & Poster Creation With AI | പോസ്റ്റർ ഉണ്ടാക്കാം!',
     url: 'https://youtu.be/YSZioQKrHJE',
+    date: 'June 19, 2026',
   },
 ])
 

@@ -1,6 +1,7 @@
 import { StickyHeroExperience } from './components/StickyHeroExperience'
 import { AboutSection } from './components/AboutSection'
 import { SocialMediaSection } from './components/SocialMediaSection'
+import { PromptLibrarySection } from '@/features/prompts/components/PromptLibrarySection'
 import { useFullPageScroll } from './hooks/useFullPageScroll'
 
 export function HomePage() {
@@ -18,6 +19,9 @@ export function HomePage() {
 
       {/* SCREEN 4: SOCIAL MEDIA (HERO BANNER & PLATFORM CARDS) */}
       <SocialMediaSection />
+
+      {/* DEDICATED SECTION: AI PROMPT LIBRARY */}
+      <PromptLibrarySection />
     </div>
   )
 }

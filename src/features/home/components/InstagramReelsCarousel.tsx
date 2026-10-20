@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Play, X, Sparkles } from 'lucide-react'
 import { InstagramBadgeIcon, InstagramIcon } from '@/shared/ui/Icons/SocialIcons'
+import { cn } from '@/shared/lib/utils/cn'
 import {
   INSTAGRAM_REELS,
   InstagramReelItem,
@@ -29,8 +30,25 @@ interface InstagramReelsCarouselProps {
 export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [activeReel, setActiveReel] = useState<InstagramReelItem | null>(null)
+  const [touchedReelId, setTouchedReelId] = useState<string | null>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const clickTimeoutRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (clickTimeoutRef.current) {
+        window.clearTimeout(clickTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  const handleCardClick = (reel: InstagramReelItem) => {
+    setTouchedReelId(reel.id)
+    clickTimeoutRef.current = window.setTimeout(() => {
+      setActiveReel(reel)
+    }, 160)
+  }
 
   const reels = removeDuplicateReels(INSTAGRAM_REELS)
 
@@ -118,12 +136,20 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
           className="flex items-stretch gap-4 sm:gap-5 overflow-x-auto scroll-smooth pb-4 px-1 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {reels.map((reel) => {
+            const isTouched = touchedReelId === reel.id
+
             return (
               <button
                 key={reel.id}
                 type="button"
-                onClick={() => setActiveReel(reel)}
-                className="group relative shrink-0 w-[270px] sm:w-[310px] lg:w-[335px] rounded-2xl sm:rounded-[24px] bg-[#fbf9f4] border border-[#e8e2d4] hover:border-[#7BC943]/60 p-3.5 sm:p-4 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-10px_rgba(20,31,16,0.12)] snap-start cursor-pointer flex flex-col justify-between"
+                onTouchStart={() => setTouchedReelId(reel.id)}
+                onClick={() => handleCardClick(reel)}
+                className={cn(
+                  'group relative shrink-0 w-[270px] sm:w-[310px] lg:w-[335px] rounded-2xl sm:rounded-[24px] p-3.5 sm:p-4 text-left transition-all duration-300 ease-in-out snap-start cursor-pointer flex flex-col justify-between',
+                  isTouched
+                    ? 'bg-[#bdf78b] border-[#bdf78b] -translate-y-1 shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)]'
+                    : 'bg-[#fbf9f4] hover:bg-[#bdf78b] active:bg-[#bdf78b] border border-[#e8e2d4] hover:border-[#bdf78b] active:border-[#bdf78b] hover:-translate-y-1 hover:shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)] active:shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)]'
+                )}
               >
                 {/* 1. Landscape ~16:9 Thumbnail Box with Rounded Corners */}
                 <div className="relative aspect-[16/10] sm:aspect-video w-full rounded-xl sm:rounded-[18px] overflow-hidden bg-slate-900 select-none">
@@ -131,7 +157,12 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                     <img
                       src={reel.thumbnailUrl}
                       alt={reel.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={cn(
+                        'w-full h-full object-cover transition-transform duration-500',
+                        isTouched
+                          ? 'scale-105'
+                          : 'group-hover:scale-105 group-active:scale-105'
+                      )}
                       loading="lazy"
                     />
                   ) : (
@@ -141,8 +172,22 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                   )}
 
                   {/* Gradient Overlay & Subtle Play Button on hover */}
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                    <div className="w-11 h-11 rounded-full bg-white/95 group-hover:bg-[#7BC943] text-[#141f10] group-hover:text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
+                  <div
+                    className={cn(
+                      'absolute inset-0 transition-colors duration-300 ease-in-out flex items-center justify-center',
+                      isTouched
+                        ? 'bg-black/10'
+                        : 'bg-black/20 group-hover:bg-black/10 group-active:bg-black/10'
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'w-11 h-11 rounded-full text-[#141f10] flex items-center justify-center shadow-md transition-all duration-300 ease-in-out',
+                        isTouched
+                          ? 'bg-[#bdf78b] scale-110'
+                          : 'bg-white/95 group-hover:bg-[#bdf78b] group-active:bg-[#bdf78b] group-hover:scale-110 group-active:scale-110'
+                      )}
+                    >
                       <Play className="w-4 h-4 ml-0.5 fill-current" />
                     </div>
                   </div>
@@ -152,13 +197,25 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
                 <div className="pt-4 sm:pt-5 pb-1 px-1 flex-1 flex flex-col justify-between">
                   <div>
                     {/* Small Faded Gray Date Label */}
-                    <p className="text-xs sm:text-[13px] text-[#788574] font-medium font-sans mb-2 sm:mb-2.5">
+                    <p
+                      className={cn(
+                        'text-xs sm:text-[13px] font-semibold font-sans mb-2 sm:mb-2.5 transition-colors duration-300 ease-in-out',
+                        isTouched
+                          ? 'text-[#141f10]'
+                          : 'text-[#788574] group-hover:text-[#141f10] group-active:text-[#141f10]'
+                      )}
+                    >
                       {reel.date || 'July 10, 2026'}
                     </p>
 
                     {/* Much Larger Bold Serif Title with Tighter Line Spacing */}
                     <h3
-                      className="text-xl sm:text-[22px] lg:text-2xl font-bold text-[#141f10] group-hover:text-[#2c5c13] transition-colors leading-[1.18] sm:leading-[1.16] tracking-tight line-clamp-3"
+                      className={cn(
+                        'text-xl sm:text-[22px] lg:text-2xl font-bold transition-colors duration-300 ease-in-out leading-[1.18] sm:leading-[1.16] tracking-tight line-clamp-3',
+                        isTouched
+                          ? 'text-[#141f10]'
+                          : 'text-[#141f10] group-hover:text-[#141f10] group-active:text-[#141f10]'
+                      )}
                       style={{ fontFamily: '"DM Serif Display", serif' }}
                     >
                       {reel.title}
@@ -167,7 +224,14 @@ export function InstagramReelsCarousel({ className }: InstagramReelsCarouselProp
 
                   {/* 3. Bottom View -> Link in Small Underlined Font */}
                   <div className="mt-6 sm:mt-8 pt-1">
-                    <span className="text-xs sm:text-[13px] font-semibold text-[#141f10] underline underline-offset-4 decoration-1 group-hover:text-[#2c5c13] transition-colors inline-flex items-center gap-1.5">
+                    <span
+                      className={cn(
+                        'text-xs sm:text-[13px] font-bold text-[#141f10] underline underline-offset-4 decoration-1.5 transition-colors duration-300 ease-in-out inline-flex items-center gap-1.5',
+                        isTouched
+                          ? 'decoration-[#141f10]'
+                          : 'decoration-[#141f10]/60 group-hover:decoration-[#141f10] group-active:decoration-[#141f10]'
+                      )}
+                    >
                       View &rarr;
                     </span>
                   </div>

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Play, X, Sparkles } from 'lucide-react'
 import { YoutubeIcon } from '@/shared/ui/Icons/SocialIcons'
+import { cn } from '@/shared/lib/utils/cn'
 import {
   YOUTUBE_VIDEOS,
   YouTubeVideoItem,
@@ -23,8 +24,25 @@ interface YouTubeVideoCarouselProps {
 export function YouTubeVideoCarousel({ className }: YouTubeVideoCarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [activeVideo, setActiveVideo] = useState<YouTubeVideoItem | null>(null)
+  const [touchedVideoId, setTouchedVideoId] = useState<string | null>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const clickTimeoutRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (clickTimeoutRef.current) {
+        window.clearTimeout(clickTimeoutRef.current)
+      }
+    }
+  }, [])
+
+  const handleCardClick = (video: YouTubeVideoItem) => {
+    setTouchedVideoId(video.id)
+    clickTimeoutRef.current = window.setTimeout(() => {
+      setActiveVideo(video)
+    }, 160)
+  }
 
   const videos = removeDuplicateVideos(YOUTUBE_VIDEOS)
 
@@ -113,21 +131,33 @@ export function YouTubeVideoCarousel({ className }: YouTubeVideoCarouselProps) {
         >
           {videos.map((video) => {
             const thumbnail = getYouTubeThumbnailUrl(video.url)
+            const isTouched = touchedVideoId === video.id
 
             return (
               <button
                 key={video.id}
                 type="button"
-                onClick={() => setActiveVideo(video)}
-                className="group relative shrink-0 w-[260px] sm:w-[290px] lg:w-[320px] rounded-2xl bg-white border border-[#e2ece0] hover:border-[#7BC943] p-3 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_-10px_rgba(116,198,64,0.22)] snap-start cursor-pointer flex flex-col justify-between"
+                onTouchStart={() => setTouchedVideoId(video.id)}
+                onClick={() => handleCardClick(video)}
+                className={cn(
+                  'group relative shrink-0 w-[260px] sm:w-[290px] lg:w-[320px] rounded-2xl sm:rounded-[24px] p-3.5 sm:p-4 text-left transition-all duration-300 ease-in-out snap-start cursor-pointer flex flex-col justify-between',
+                  isTouched
+                    ? 'bg-[#bdf78b] border-[#bdf78b] -translate-y-1 shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)]'
+                    : 'bg-[#fbf9f4] hover:bg-[#bdf78b] active:bg-[#bdf78b] border border-[#e8e2d4] hover:border-[#bdf78b] active:border-[#bdf78b] hover:-translate-y-1 hover:shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)] active:shadow-[0_16px_36px_-10px_rgba(189,247,139,0.45)]'
+                )}
               >
                 {/* 16:9 Thumbnail Box */}
-                <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-900 select-none">
+                <div className="relative aspect-video w-full rounded-xl sm:rounded-[18px] overflow-hidden bg-slate-900 select-none">
                   {thumbnail ? (
                     <img
                       src={thumbnail}
                       alt={video.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={cn(
+                        'w-full h-full object-cover transition-transform duration-500',
+                        isTouched
+                          ? 'scale-105'
+                          : 'group-hover:scale-105 group-active:scale-105'
+                      )}
                       loading="lazy"
                     />
                   ) : (
@@ -137,18 +167,66 @@ export function YouTubeVideoCarousel({ className }: YouTubeVideoCarouselProps) {
                   )}
 
                   {/* Gradient Overlay & Play Button */}
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white/95 group-hover:bg-[#7BC943] text-[#141f10] group-hover:text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110">
-                      <Play className="w-5 h-5 ml-0.5 fill-current" />
+                  <div
+                    className={cn(
+                      'absolute inset-0 transition-colors duration-300 ease-in-out flex items-center justify-center',
+                      isTouched
+                        ? 'bg-black/15'
+                        : 'bg-black/25 group-hover:bg-black/15 group-active:bg-black/15'
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        'w-11 h-11 sm:w-12 sm:h-12 rounded-full text-[#141f10] flex items-center justify-center shadow-md transition-all duration-300 ease-in-out',
+                        isTouched
+                          ? 'bg-[#bdf78b] scale-110'
+                          : 'bg-white/95 group-hover:bg-[#bdf78b] group-active:bg-[#bdf78b] group-hover:scale-110 group-active:scale-110'
+                      )}
+                    >
+                      <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-0.5 fill-current" />
                     </div>
                   </div>
                 </div>
 
-                {/* Video Title */}
-                <div className="pt-3 px-1 pb-1">
-                  <h3 className="text-sm sm:text-[15px] font-bold text-[#141f10] group-hover:text-[#38761a] transition-colors line-clamp-2 leading-snug">
-                    {video.title}
-                  </h3>
+                {/* Video Content: Date + Title + View Link */}
+                <div className="pt-3.5 px-1 pb-1 flex-1 flex flex-col justify-between">
+                  <div>
+                    {video.date && (
+                      <p
+                        className={cn(
+                          'text-xs sm:text-[13px] font-semibold font-sans mb-1.5 sm:mb-2 transition-colors duration-300 ease-in-out',
+                          isTouched
+                            ? 'text-[#141f10]'
+                            : 'text-[#788574] group-hover:text-[#141f10] group-active:text-[#141f10]'
+                        )}
+                      >
+                        {video.date}
+                      </p>
+                    )}
+                    <h3
+                      className={cn(
+                        'text-sm sm:text-[15px] font-bold transition-colors duration-300 ease-in-out line-clamp-2 leading-snug',
+                        isTouched
+                          ? 'text-[#141f10]'
+                          : 'text-[#141f10] group-hover:text-[#141f10] group-active:text-[#141f10]'
+                      )}
+                    >
+                      {video.title}
+                    </h3>
+                  </div>
+
+                  <div className="mt-4 pt-1">
+                    <span
+                      className={cn(
+                        'text-xs sm:text-[13px] font-bold text-[#141f10] underline underline-offset-4 decoration-1.5 transition-colors duration-300 ease-in-out inline-flex items-center gap-1.5',
+                        isTouched
+                          ? 'decoration-[#141f10]'
+                          : 'decoration-[#141f10]/60 group-hover:decoration-[#141f10] group-active:decoration-[#141f10]'
+                      )}
+                    >
+                      View &rarr;
+                    </span>
+                  </div>
                 </div>
               </button>
             )
